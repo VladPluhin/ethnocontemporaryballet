@@ -7,5 +7,5 @@ jobs:
   deploy:
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          publish_dir: ./public
+          publish_dir: ./
           cname: ${{ secrets.MY_CUSTOM_URL}}
