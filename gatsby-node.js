@@ -1,50 +1,56 @@
- const path = require('path')
+const path = require("path");
 
-exports.createPages = async ({ graphql, actions, reporter  }) => {
-  const { createPage } = actions
-  const artistsPage = path.resolve('./src/templates/artist.js')
-  const projectsPage = path.resolve('./src/templates/project.js')
-  const newEventPage = path.resolve('./src/templates/new-event.js')
-  const result =  await graphql(
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const { createPage } = actions;
+  const artistsPage = path.resolve("./src/templates/artist.js");
+  const projectsPage = path.resolve("./src/templates/project.js");
+  const newEventPage = path.resolve("./src/templates/new-event.js");
+  const result = await graphql(
     `
       {
-        allContentfulPersonCard(filter: {nameBlock: {eq: "person"}}) {
+        allContentfulPersonCard(filter: { nameBlock: { eq: "person" } }) {
           nodes {
             slug
             namePersone
           }
         }
-        newEvents: allContentfulCardEvent(filter: {nameBlock: {eq: "CardNewEvent"}}) {
+        newEvents: allContentfulCardEvent(
+          filter: { nameBlock: { eq: "CardNewEvent" } }
+        ) {
           nodes {
             slug
             nameEvent
           }
         }
-        projects: allContentfulCardEvent(filter: {nameBlock: {eq: "projectModel"}}){
+        projects: allContentfulCardEvent(
+          filter: { nameBlock: { eq: "projectModel" } }
+        ) {
           nodes {
             slug
             nameEvent
           }
         }
       }
-  `)
- 
+    `
+  );
+
   if (result.errors) {
     reporter.panicOnBuild(
       `There was an error loading your Contentful posts`,
       result.errors
-    )
-    return
+    );
+    return;
   }
 
-  const artists = result.data.allContentfulPersonCard.nodes
+  const artists = result.data.allContentfulPersonCard.nodes;
   const projects = result.data.projects.nodes;
   const eventsNew = result.data.newEvents.nodes;
-  
+
   if (artists.length > 0) {
     artists.forEach((artist, index) => {
-      const previousArtistSlug = index === 0 ? '0' : artists[index - 1].slug
-      const nextArtistSlug = index === artists.length - 1 ? '0' : artists[index + 1].slug
+      const previousArtistSlug = index === 0 ? "0" : artists[index - 1].slug;
+      const nextArtistSlug =
+        index === artists.length - 1 ? "0" : artists[index + 1].slug;
       createPage({
         path: `/team/${artist.slug}`,
         component: artistsPage,
@@ -54,14 +60,15 @@ exports.createPages = async ({ graphql, actions, reporter  }) => {
           previousArtistSlug: previousArtistSlug,
           nextArtistSlug: nextArtistSlug,
         },
-      })
-    })
+      });
+    });
   }
-  
+
   if (projects.length > 0) {
     projects.forEach((eventData, index) => {
-      const previousEventSlug = index === 0 ? '0' : projects[index - 1].slug
-      const nextEventSlug = index === projects.length - 1 ? '0' : projects[index + 1].slug
+      const previousEventSlug = index === 0 ? "0" : projects[index - 1].slug;
+      const nextEventSlug =
+        index === projects.length - 1 ? "0" : projects[index + 1].slug;
       createPage({
         path: `/projects/${eventData.slug}`,
         component: projectsPage,
@@ -71,14 +78,15 @@ exports.createPages = async ({ graphql, actions, reporter  }) => {
           previousPostSlug: previousEventSlug,
           nextPostSlug: nextEventSlug,
         },
-      })
-    })
+      });
+    });
   }
 
   if (eventsNew.length > 0) {
     eventsNew.forEach((eventData, index) => {
-      const previousEventSlug = index === 0 ? '0' : eventsNew[index - 1].slug
-      const nextEventSlug = index === eventsNew.length - 1 ? '0' : eventsNew[index + 1].slug
+      const previousEventSlug = index === 0 ? "0" : eventsNew[index - 1].slug;
+      const nextEventSlug =
+        index === eventsNew.length - 1 ? "0" : eventsNew[index + 1].slug;
       createPage({
         path: `/new-events/${eventData.slug}`,
         component: newEventPage,
@@ -88,7 +96,27 @@ exports.createPages = async ({ graphql, actions, reporter  }) => {
           previousPostSlug: previousEventSlug,
           nextPostSlug: nextEventSlug,
         },
-      })
-    })
+      });
+    });
   }
-}
+};
+const path = require("path");
+const fs = require("fs");
+
+exports.onPreInit = () => {
+  if (process.argv[2] === "build") {
+    fs.rmdirSync(path.join(__dirname, "dist"), { recursive: true });
+    fs.renameSync(
+      path.join(__dirname, "public"),
+      path.join(__dirname, "public_dev")
+    );
+  }
+};
+
+exports.onPostBuild = () => {
+  fs.renameSync(path.join(__dirname, "public"), path.join(__dirname, "dist"));
+  fs.renameSync(
+    path.join(__dirname, "public_dev"),
+    path.join(__dirname, "public")
+  );
+};
