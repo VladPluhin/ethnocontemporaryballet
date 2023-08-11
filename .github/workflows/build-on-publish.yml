@@ -30,4 +30,3 @@ jobs:
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_dir: _site
-          cname: ${{vars.MY_CUSTOM_URL}}
