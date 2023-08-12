@@ -14,7 +14,7 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "deploy": "gatsby build  && gh-pages -build",
+    "deploy": "gatsby build && gh-pages _site -b gh-pages",
     "predeploy": "npm run build"
   },
   "dependencies": {
