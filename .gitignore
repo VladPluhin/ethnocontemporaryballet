@@ -1,0 +1,5 @@
+node_modules/
+.cache/
+.env
+.github/workflows/_config.yml
+public/
