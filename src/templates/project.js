@@ -27,12 +27,11 @@ export default ({data}) => {
                         {eventData.title && <h1 className="section-content__title">{eventData.title}</h1> }
                        
                         {eventData?.previewText && <h4 className="section-content__subtitle">{eventData.previewText}</h4>} 
-                        <div className="section-content__contetn">
+                        <div className="section-content__content">
                             {eventData.descriptionEvent &&  <>{renderRichText(eventData.descriptionEvent)}</>}
                             {eventData.newEvent && eventData.linkEvent && <div className="section-content__btn-wrap">
                                <a href={eventData.linkEvent} className="link ">{eventData.textBtn}</a>
-                            </div>
-                            }
+                              </div>}
                         </div>
                     </article>
                       <ul  className="pagination">
@@ -71,6 +70,7 @@ query MyQuery(
           textBtn
           previewText
           id
+          video
           projectgallery {
             id
             description

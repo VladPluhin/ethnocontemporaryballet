@@ -50,6 +50,7 @@ export const query = graphql`
             slug
             textBtn
             title
+            video
           }
           ... on ContentfulMainSlide {
             id
