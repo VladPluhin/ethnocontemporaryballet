@@ -77,6 +77,7 @@ export const query = graphql`
       }
       title
     }
+    
   contentfulContentMainModel(nameBlock: {eq: "ModelAboutUS"}) {
     id
     sectionBlocks {

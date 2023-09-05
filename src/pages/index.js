@@ -7,25 +7,6 @@ import SectionTeam from '../components/sectionTeam/sectionTeam'
 import SectionEvents from '../components/sectionEvents/sectionEvents'
 import SectionAbout from '../components/sectionAbout/sectionAbout'
 import * as sorts from '../components/sorts/sorts'
-
-const IndexPage =({data}) => {
-  const pageData = {...data.allContentfulPage.nodes[0].sectionContents}
-  console.log(pageData)
-    return (
-      <Layout>
-      <SectionMain  data={ sorts.getsortedData(pageData, 'ModelMainSlider')}/>
-      <SectionAbout data={ sorts.getsortedData(pageData, "ModelAboutUS")}/>
-      <SectionTeam  data={ sorts.getsortedData(pageData, "ModelTeam")}/>
-      <SectionEvents data={ sorts.getsortedData(pageData, "ModelProject")} eventCard='projectModel'/>
-      <SectionEvents data={ sorts.getsortedData(pageData, "ModelEvent")} eventCard='CardNewEvent'/>
-    </Layout>
-  )
-}
-
-
-export const Head = () => <Seo title="Home" />
-export default IndexPage
-
 export const query = graphql`
 {
   allContentfulPage(filter: {nameSection: {eq: "Home Page"}}) {
@@ -102,3 +83,21 @@ export const query = graphql`
   }
 }
 `
+const IndexPage =({data}) => {
+  const pageData = {...data.allContentfulPage.nodes[0].sectionContents}
+  console.log(pageData)
+    return (
+      <Layout>
+      <SectionMain  data={ sorts.getsortedData(pageData, 'ModelMainSlider')}/>
+      <SectionAbout data={ sorts.getsortedData(pageData, "ModelAboutUS")}/>
+      <SectionTeam  data={ sorts.getsortedData(pageData, "ModelTeam")}/>
+      <SectionEvents data={ sorts.getsortedData(pageData, "ModelProject")} eventCard='projectModel'/>
+      <SectionEvents data={ sorts.getsortedData(pageData, "ModelEvent")} eventCard='CardNewEvent'/>
+    </Layout>
+  )
+}
+
+
+export const Head = () => <Seo title="Home" />
+export default IndexPage
+
