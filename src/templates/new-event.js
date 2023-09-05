@@ -33,7 +33,7 @@ export default ({data}) => {
                         </div>
                         {eventData.video && <div className="video-wrapper" >
                               <iframe src={eventData.video}></iframe>
-                             </div>}
+                        </div>}
                     </article>
                       <ul  className="pagination ">
                         <li>
@@ -72,9 +72,7 @@ query MyQuery(
           textBtn
           previewText
           id
-          videoBlock{
-            raw
-          }
+        
           video
           image {
             url
