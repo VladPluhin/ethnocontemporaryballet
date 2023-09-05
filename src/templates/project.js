@@ -10,7 +10,7 @@ export default ({data}) => {
   const nextPage= {...data.next.nodes[0]}
   const prevPage= {...data.previous.nodes[0]}
   const eventData= {...data.allContentfulCardEvent.nodes[0]}
-  
+
      return (
        <Layout>
          <section className="section-content">
@@ -35,7 +35,7 @@ export default ({data}) => {
                             }
                         </div>
                     </article>
-                      <ul  className="pagination ">
+                      <ul  className="pagination">
                         <li>
                           {prevPage.slug &&  <Link to={ `/projects/${prevPage.slug}`}  className="link prev ">{prevPage.nameEvent}</Link>}
                         </li>
