@@ -32,10 +32,8 @@ export default ({data}) => {
                             
                         </div>
                         {eventData.video && <div className="video-wrapper" >
-                           
                               <iframe src={eventData.video}></iframe>
                              </div>}
-                             {eventData.videoBlock &&     <>{renderRichText(eventData.videoBlock)}</>}
                     </article>
                       <ul  className="pagination ">
                         <li>
