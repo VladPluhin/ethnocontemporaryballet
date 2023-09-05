@@ -33,6 +33,9 @@ export default ({data}) => {
                                <a href={eventData.linkEvent} className="link ">{eventData.textBtn}</a>
                               </div>}
                         </div>
+                         {eventData.video && <div className="video-wrapper" >
+                              <iframe src={eventData.video}></iframe>
+                        </div>}
                     </article>
                       <ul  className="pagination">
                         <li>
