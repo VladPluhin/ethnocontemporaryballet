@@ -70,6 +70,9 @@ query MyQuery(
           textBtn
           previewText
           id
+          videoBlock{
+            raw
+          }
           video
           projectgallery {
             id

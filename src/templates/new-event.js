@@ -9,7 +9,7 @@ export default ({data}) => {
   const nextPage= {...data.next.nodes[0]}
   const prevPage= {...data.previous.nodes[0]}
   const eventData= {...data.allContentfulCardEvent.nodes[0]}
-  
+  console.log(eventData)
      return (
        <Layout>
          <section className="section-content">
@@ -31,12 +31,11 @@ export default ({data}) => {
                             }
                             
                         </div>
-                        {eventData.video && <div className="video-wrapper">
-                              <iframe src={eventData.video} title="YouTube video player" frameBorder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                allowFullScreen>
-                              </iframe>
+                        {eventData.video && <div className="video-wrapper" >
+                           
+                              <iframe src={eventData.video}></iframe>
                              </div>}
+                             {eventData.videoBlock &&     <>{renderRichText(eventData.videoBlock)}</>}
                     </article>
                       <ul  className="pagination ">
                         <li>
@@ -75,6 +74,9 @@ query MyQuery(
           textBtn
           previewText
           id
+          videoBlock{
+            raw
+          }
           video
           image {
             url
