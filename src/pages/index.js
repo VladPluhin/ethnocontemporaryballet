@@ -75,8 +75,6 @@ export const query = graphql`
             position
             slug
           }
-      
-         
         }
       }
     }
