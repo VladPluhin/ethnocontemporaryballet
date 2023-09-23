@@ -7,7 +7,6 @@ const Footer = () => {
   const submenuOpeners = useRef([]);
   const data = useStaticQuery(graphql`
     {
-      
       contentfulFooterNavigation {
         copyright
         navigationHolder {
@@ -43,7 +42,7 @@ const Footer = () => {
           iconLinkUrl
         }
       }
-      contentfulIconLink(nameIcon: {eq: "PayPal"}) {
+      contentfulIconLink(nameIcon: { eq: "PayPal" }) {
         id
         imageIcon {
           url
@@ -69,27 +68,24 @@ const Footer = () => {
   `);
 
   const handleClick = (e) => {
-      const wrapper = e.currentTarget.closest("div.footer__list-item");
+    const wrapper = e.currentTarget.closest("div.footer__list-item");
 
-      if (wrapper.classList.contains("active")) {
-        wrapper.classList.remove("active");
-        return;
-      } else {
-        wrapper.classList.toggle("active");
-      }
-    };
-    useEffect(() => {
-      if (submenuOpeners.current) {
-        submenuOpeners.current.forEach((item) => {
-          item.addEventListener("click", handleClick);
-        });
-    
-      }
-    }, []);
-  
-  
-  
-  const supportData ={...data.contentfulIconLink}
+    if (wrapper.classList.contains("active")) {
+      wrapper.classList.remove("active");
+      return;
+    } else {
+      wrapper.classList.toggle("active");
+    }
+  };
+  useEffect(() => {
+    if (submenuOpeners.current) {
+      submenuOpeners.current.forEach((item) => {
+        item.addEventListener("click", handleClick);
+      });
+    }
+  }, []);
+
+  const supportData = { ...data.contentfulIconLink };
   const navData = data.contentfulFooterNavigation.navigationHolder;
   const headerLogo = data.contentfulHeader.headerLogo.logoImage;
   const socialList = data.allContentfulIconLink.nodes;
@@ -100,24 +96,22 @@ const Footer = () => {
         <nav className="footer__navigation">
           <div className="footer__logo">
             <Link to="/" className="footer__logo-link">
-              <img
-                src={headerLogo.url}
-                alt={headerLogo.description}
-              />
+              <img src={headerLogo.url} alt={headerLogo.description} />
             </Link>
           </div>
           <div className="footer__nav">
             {navData.map((element) => {
               return (
                 <div
-                  key={`footer_${element.opener.id ? element.opener.id : element.opener.textNavigationLink}`}
+                  key={`footer_${
+                    element.opener.id
+                      ? element.opener.id
+                      : element.opener.textNavigationLink
+                  }`}
                   className="footer__list-item"
                 >
                   <div className="opener-wrapper">
-                    <Link
-                      className="footer__title"
-                      to={element.opener.textUrl}
-                    >
+                    <Link className="footer__title" to={element.opener.textUrl}>
                       {element.opener.textNavigationLink}
                     </Link>
                     {element.opener.footeropenclose[0].linksWrapper && (
@@ -127,7 +121,6 @@ const Footer = () => {
                       ></span>
                     )}
                   </div>
-
                   {element.opener.footeropenclose[0].linksWrapper && (
                     <ul className="footer__list">
                       {[...element.opener?.footeropenclose[0]?.linksWrapper]
@@ -136,12 +129,15 @@ const Footer = () => {
                           return (
                             <li
                               key={`footer_${item.id}`}
-                              className="footer__list-item">
+                              className="footer__list-item"
+                            >
                               <Link
                                 to={
                                   item.slug
                                     ? `${element.opener.textUrl}${item.slug}`
-                                    : `/${item.slug}`}>
+                                    : `/${item.slug}`
+                                }
+                              >
                                 {item.nameEvent ?? item.namePersone}
                               </Link>
                             </li>
@@ -157,13 +153,16 @@ const Footer = () => {
         <div className="social-holder">
           <SocialList data={socialList} nameOfBlock={"footer"} />
           <div className="support-us">
-              <span>{supportData.text}</span>
-              <a className="support-us__icon"  href={supportData.iconLinkUrl}>
-                <img  src={supportData.imageIcon.url} alt={supportData.imageIcon.title}/>
-              </a>
+            <span>{supportData.text}</span>
+            <a className="support-us__icon" href={supportData.iconLinkUrl}>
+              <img
+                src={supportData.imageIcon.url}
+                alt={supportData.imageIcon.title}
+              />
+            </a>
           </div>
           <div className="copyright-holder">
-              <p>{data.contentfulFooterNavigation.copyright}</p>
+            <p>{data.contentfulFooterNavigation.copyright}</p>
           </div>
         </div>
       </div>
