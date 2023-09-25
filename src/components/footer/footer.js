@@ -151,6 +151,7 @@ const Footer = () => {
             })}
           </div>
         </nav>
+
         <div className="social-holder">
           <SocialList data={socialList} nameOfBlock={"footer"} />
           <div className="support-us">
