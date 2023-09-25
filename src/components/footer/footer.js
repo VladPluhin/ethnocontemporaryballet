@@ -89,7 +89,7 @@ const Footer = () => {
   const navData = data.contentfulFooterNavigation.navigationHolder;
   const headerLogo = data.contentfulHeader.headerLogo.logoImage;
   const socialList = data.allContentfulIconLink.nodes;
-
+  console.log(navData);
   return (
     <footer className="footer">
       <div className="container">
@@ -126,6 +126,7 @@ const Footer = () => {
                       {[...element.opener?.footeropenclose[0]?.linksWrapper]
                         .filter((item) => item.slug)
                         .map((item) => {
+                          console.log(item);
                           return (
                             <li
                               key={`footer_${item.id}`}
