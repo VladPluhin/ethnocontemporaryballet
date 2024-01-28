@@ -84,6 +84,7 @@
     &__title {
         font-size: 20px;
         text-transform: capitalize;
+        width: 100%;
 
         @media (min-width: 1200px) {
             font-size: 28px;
@@ -95,9 +96,15 @@
         background-color: #0b00680d;
         padding: 40px 15px;
         width: 100%;
+        min-height: 169px;
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        justify-content: center;
     }
 
     &__text {
+        width: 100%;
 
         @media (min-width: 1200px) {
             font-size: 20px;
@@ -110,5 +117,9 @@
         @media (min-width: 1200px) {
             font-size: 20px;
         }
+    }
+
+    .btn-wrap {
+        align-self: flex-end;
     }
 }

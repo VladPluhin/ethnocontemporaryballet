@@ -3,7 +3,6 @@ import * as React from "react";
 import "./eventCard.scss";
 
 function EventCard({ showData }) {
-  console.log(showData);
   return (
     <Link
       to={

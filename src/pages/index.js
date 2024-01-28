@@ -7,6 +7,7 @@ import SectionTeam from "../components/sectionTeam/sectionTeam";
 import SectionEvents from "../components/sectionEvents/sectionEvents";
 import SectionAbout from "../components/sectionAbout/sectionAbout";
 import * as sorts from "../components/sorts/sorts";
+
 export const query = graphql`
   {
     allContentfulPage(filter: { nameSection: { eq: "Home Page" } }) {
@@ -83,7 +84,7 @@ export const query = graphql`
 `;
 const IndexPage = ({ data }) => {
   const pageData = { ...data.allContentfulPage.nodes[0].sectionContents };
-
+  console.log(111, data);
   return (
     <Layout>
       <SectionMain data={sorts.getsortedData(pageData, "ModelMainSlider")} />

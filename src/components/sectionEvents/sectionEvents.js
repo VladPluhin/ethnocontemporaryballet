@@ -12,7 +12,6 @@ function SectionEvents({ data, eventCard = "", indent = false }) {
   EventsData.sort(
     (a, b) => parseInt(a.countPosition) - parseInt(b.countPosition)
   );
-
   return (
     <section
       className={indent ? "section-events section-indent" : "section-events"}
