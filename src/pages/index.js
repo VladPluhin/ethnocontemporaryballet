@@ -85,7 +85,6 @@ export const query = graphql`
 
 const IndexPage = ({ data }) => {
   const pageData = { ...data.allContentfulPage.nodes[0].sectionContents };
-  console.log(111, data);
   return (
     <Layout>
       <SectionMain data={sorts.getsortedData(pageData, "ModelMainSlider")} />
